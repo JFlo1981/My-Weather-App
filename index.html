@@ -13,23 +13,23 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>My Weather</title>
 </head>
-<body>
+<body class="has-background-grey-lighter">
     <section class="is=mobile level hero is-small is-info">
-        <div class="level-left hero-head pt-5">
+        <div class="level-right hero-head pt-5">
           <div class="container level">
             <h1 class="title">
               Weather Anytime
             </h1>
-            <h2 class="subtitle">
+            <h2 class="subtitle mt-5">
               Choose a city for current conditions and a 5-day forecast
             </h2>
           </div>
         </div> 
-        <div class="is-mobile level-right hero-head">
-          <div class="control is-expanded mb-4">
+        <div class="is-mobile level-left hero-head">
+          <div class="control is-expanded mb-4 ml-6">
               <input class="input" type="text" placeholder="Enter a city...">
           </div>
-          <div class="control mb-4 mr-4">
+          <div class="control mb-4">
               <a class="button is-white is-outlined">
                 Search
               </a>
@@ -37,6 +37,15 @@
         </div>
       </section>
       <div class="tile">
+        <div class="tile is-4 is-parent">
+          <article class="tile is-child box">
+              <!-- <p class="title">Ten</p> -->
+              <p class="subtitle has-text-centered">Favorite Locations</p>
+              <div class="content">
+                <p></p>
+              </div>
+          </article>
+        </div>
         <div class="tile is-8 is-parent">
           <article class="tile is-child box">
             <!-- <p class="title">Nine</p> -->
@@ -49,17 +58,9 @@
             </div>
           </article>
         </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <!-- <p class="title">Ten</p> -->
-            <p class="subtitle has-text-centered">Favorite Locations</p>
-            <div class="content">
-              <p></p>
-            </div>
-          </article>
-        </div>
+
       </div>
-      <div class="tile is-ancestor">
+      <div class="tile is-ancestor m-1">
         <div class="tile is-parent">
           <article class="tile is-child box">
             <!-- <p class="title">Day 1</p> -->
