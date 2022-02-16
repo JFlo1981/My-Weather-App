@@ -35,7 +35,7 @@ function refreshBlock() {
     $('#currentDay').html(new moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A"))
 };
 
-// get lat and lon for location with geoclocation API
+// get lat and lon for location with geolocation API
 function getUserLoc() {
     fetch('http://api.openweathermap.org/geo/1.0/direct?q=tokyo,jp&limit=5&appid=' + apiKey)
     .then(res => res.json())
@@ -45,3 +45,5 @@ function getUserLoc() {
 }
 getUserLoc();
 });
+
+// use lat and lon from geolocate as input for weatherAPI url
