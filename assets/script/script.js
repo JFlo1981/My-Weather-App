@@ -14,24 +14,34 @@
 
 // HINT: Abstract API call to a function with a city as the parameter to be passed into the url 
 
+
+
 $(document).ready(function () {
 
-const weatherApiKey = "3c5d9ad567245f91ed996395bc228529";
-
-// get lat and lon for location
+const apiKey = "13a3e9ee9e5dcaabc3e7976ad9a77077";
 
 // display the current time & date
-const date = moment().format("[It is ]dddd, MMMM Do, YYYY <br> [The current time is ]h:mm A")
+const date = moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A")
 $('#currentDay').html(date);
 
-// refresh every minute
+// set refresh every minute
 function setupRefresh() {
     setInterval(refreshBlock,60000);
 };
 setupRefresh()
 
+// display new moment each 60 secs
 function refreshBlock() {
-    $('#currentDay').html(new moment().format("[It is ]dddd, MMMM Do, YYYY <br> [The current time is ]h:mm A"))
+    $('#currentDay').html(new moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A"))
 };
 
+// get lat and lon for location with geoclocation API
+function getUserLoc() {
+    fetch('http://api.openweathermap.org/geo/1.0/direct?q=tokyo,jp&limit=5&appid=' + apiKey)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+    })
+}
+getUserLoc();
 });
