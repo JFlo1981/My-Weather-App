@@ -13,3 +13,25 @@
 //    -when the user clicks the city from the dropdown, pass the city into the api call to get and display the info from that city again
 
 // HINT: Abstract API call to a function with a city as the parameter to be passed into the url 
+
+$(document).ready(function () {
+
+const weatherApiKey = "3c5d9ad567245f91ed996395bc228529";
+
+// get lat and lon for location
+
+// display the current time & date
+const date = moment().format("[It is ]dddd, MMMM Do, YYYY <br> [The current time is ]h:mm A")
+$('#currentDay').html(date);
+
+// refresh every minute
+function setupRefresh() {
+    setInterval(refreshBlock,60000);
+};
+setupRefresh()
+
+function refreshBlock() {
+    $('#currentDay').html(new moment().format("[It is ]dddd, MMMM Do, YYYY <br> [The time is ]h:mm A"))
+};
+
+});
