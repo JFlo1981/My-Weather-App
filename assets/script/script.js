@@ -31,7 +31,7 @@ function setupRefresh() {
 setupRefresh()
 
 function refreshBlock() {
-    $('#currentDay').html(new moment().format("[It is ]dddd, MMMM Do, YYYY <br> [The time is ]h:mm A"))
+    $('#currentDay').html(new moment().format("[It is ]dddd, MMMM Do, YYYY <br> [The current time is ]h:mm A"))
 };
 
 });
