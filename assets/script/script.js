@@ -19,6 +19,8 @@
 $(document).ready(function () {
 
 const apiKey = "13a3e9ee9e5dcaabc3e7976ad9a77077";
+// const citySearch = $('#search').attr('value');
+
 
 // display the current time & date
 const date = moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A")
@@ -36,14 +38,21 @@ function refreshBlock() {
 };
 
 // get lat and lon for location with geolocation API
+
+// console.log(citySearch);
+
 function getUserLoc() {
-    fetch('http://api.openweathermap.org/geo/1.0/direct?q=tokyo,jp&limit=5&appid=' + apiKey)
+    fetch('http://api.openweathermap.org/geo/1.0/direct?q=${citySearch},jp&limit=5&appid=${apiKey}')
     .then(res => res.json())
     .then(data => {
         console.log(data)
     })
-}
+};
+
+
+
 getUserLoc();
 });
+
 
 // use lat and lon from geolocate as input for weatherAPI url

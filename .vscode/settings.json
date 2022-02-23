@@ -1,6 +1,4 @@
 {
-    "cSpell.words": [
-        "Fullheight",
-        "geolocate"
-    ]
+  "cSpell.words": ["Fullheight", "geolocate"],
+  "liveServer.settings.port": 5501
 }
