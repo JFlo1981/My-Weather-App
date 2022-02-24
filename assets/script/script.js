@@ -55,7 +55,7 @@ function getLatAndLon(lat, lon) {
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        // console.log(data)
+        console.log(data)
 
         // to be displayed in current weather section
         $('#currentWeather').html(`
@@ -73,9 +73,10 @@ function getLatAndLon(lat, lon) {
             htmlCode += `
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="subtitle">${moment().add(i+1, 'days').format("MMM Do")}</p>
+                <p class="subtitle is-marginless">${moment().add(i+1, 'days').format("MMM Do")}</p>
                 <p><img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png"></p>
-                <p>Temp: ${data.daily[i].temp.day.toFixed(1)} \xB0F</p>
+                <p>High: ${data.daily[i].temp.max.toFixed(1)} \xB0F</p>
+                <p>Low: ${data.daily[i].temp.min.toFixed(1)} \xB0F</p>
                 <p>Wind: ${data.daily[i].wind_speed.toFixed(0)} MPH</p>
                 <p>Hum: ${data.daily[i].humidity}%</p>
               </article>

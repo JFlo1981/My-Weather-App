@@ -13,6 +13,7 @@
     <title>Weather Anytime</title>
 </head>
 <body class="has-background-grey-lighter">
+
     <section class="is=mobile level hero is-small is-info">
         <div class="level-right hero-head pt-5 pl-5">
           <div class="container level">
@@ -24,6 +25,7 @@
             </h2>
           </div>
         </div> 
+
         <!-- searchbar -->
         <div class="field has-addons is-mobile level-left hero-head">
           <div class="control is-expanded mb-4 ml-6">
@@ -35,22 +37,20 @@
               </a>
           </div>
         </div>
-        <!-- <div>Make Favorite?</div>  -->
-      </section>
+    </section>
+
       <div class="tile has-text-centered">
         <div class="tile is-3 is-parent">
           <article class="tile is-child box">
-              <!-- <p class="title">Ten</p> -->
               <p class="subtitle has-text-centered">Favorite Locations</p>
               <div class="content">
-                <p></p>
               </div>
           </article>
         </div>
+
         <div class="tile is-6 is-parent">
           <article class="tile is-child box" >
-            <!-- <p class="title">Nine</p> -->
-            <p class="subtitle" id="currentCity">(Current Location)</p>
+            <p class="subtitle is-size-1" id="currentCity">(Current Location)</p>
             <button class="is-mobile button is-small is-info is-outlined ml-2 mb-3">Favorite?</button>
             <div class="content" id="currentWeather">
               <p>Temperature:</p>
@@ -60,67 +60,20 @@
             </div>
           </article>
         </div>
+
         <div class="tile is-parent">
             <article class="tile is-child box">
-                <!-- <p class="title">Ten</p> -->
                 <p class="subtitle has-text-centered">Right Now</p>
                 <div class="content" id="currentIcon">
                   <p class="has-text-centered">(icon)</p>
                 </div>
             </article>
-          </div>
+        </div>
+
       </div>
+
       <div class="tile is-ancestor m-1 has-text-centered" id="dailyWeather">
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <!-- <p class="title">Day 1</p> -->
-            <p class="subtitle is-marginless">(date here)</p>
-            <p>(icon)</p>
-            <p>Temp:</p>
-            <p>Wind:</p>
-            <p>Hum:</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <!-- <p class="title">Day 2</p> -->
-            <p class="subtitle is-marginless">(date here)</p>
-            <p>(icon)</p>
-            <p>Temp:</p>
-            <p>Wind:</p>
-            <p>Hum:</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <!-- <p class="title">Day 3</p> -->
-            <p class="subtitle is-marginless">(date here)</p>
-            <p>(icon)</p>
-            <p>Temp:</p>
-            <p>Wind:</p>
-            <p>Hum:</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <!-- <p class="title">Day 4</p> -->
-            <p class="subtitle is-marginless">(date here)</p>
-            <p>(icon)</p>
-            <p>Temp:</p>
-            <p>Wind:</p>
-            <p>Hum:</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-            <article class="tile is-child box">
-              <!-- <p class="title">Day 5</p> -->
-              <p class="subtitle is-marginless">(date here)</p>
-              <p>(icon)</p>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Hum:</p>
-            </article>
-          </div>
+        <!-- daily weather from JS here -->
       </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
