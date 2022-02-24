@@ -29,7 +29,7 @@
         <!-- searchbar -->
         <div class="field has-addons is-mobile level-left hero-head">
           <div class="control is-expanded mb-4 ml-6">
-              <input class="input" type="text" placeholder="Enter City: e.g. Tyler,TX,US -or- London,GB" id="search">
+              <input class="input" type="text" placeholder="Enter City:" id="search">
           </div>
           <div class="control mb-4 mr-6">
               <a class="button is-white is-outlined" id="searchBtn">
@@ -51,12 +51,11 @@
         <div class="tile is-6 is-parent">
           <article class="tile is-child box" >
             <p class="subtitle is-size-1" id="currentCity">(Current Location)</p>
-            <button class="is-mobile button is-small is-info is-outlined ml-2 mb-3">Favorite?</button>
+            <button class="is-mobile button is-small is-info is-outlined ml-2 mb-3" id="favBtn">Favorite?</button>
             <div class="content" id="currentWeather">
-              <p>Temperature:</p>
-              <p>Wind Speed:</p>
-              <p>Humidity:</p>
-              <p>UV Index:</p>
+              <!-- <p>Temperature:</p> -->
+              <!-- <p>Wind Speed:</p> -->
+              <!-- <p>Humidity:</p> -->
             </div>
           </article>
         </div>
@@ -65,7 +64,8 @@
             <article class="tile is-child box">
                 <p class="subtitle has-text-centered">Right Now</p>
                 <div class="content" id="currentIcon">
-                  <p class="has-text-centered">(icon)</p>
+                  <p class="has-text-centered"></p>
+                  <!-- <p>UV Index:</p> -->
                 </div>
             </article>
         </div>

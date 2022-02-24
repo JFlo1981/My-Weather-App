@@ -61,11 +61,11 @@ function getLatAndLon(lat, lon) {
         $('#currentWeather').html(`
         <p>Temperature: ${data.current.temp.toFixed(1)} \xB0F</p>
         <p>Wind Speed: ${data.current.wind_speed.toFixed(0)} MPH</p>
-        <p>Humidity: ${data.current.humidity}%</p>
-        <p>UV Index: ${data.current.uvi}</p>`)
+        <p>Humidity: ${data.current.humidity}%</p>`)
 
         $('#currentIcon').html(`
-        <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>`)
+        <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>
+        <p>UV Index: ${data.current.uvi}</p>`)
 
         // to be displayed in 5-day forecast
         var htmlCode = '';
