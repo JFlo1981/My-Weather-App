@@ -18,8 +18,8 @@
 
 $(document).ready(function () {
 
-const apiKey = "13a3e9ee9e5dcaabc3e7976ad9a77077";
-// const citySearch = $('#search').attr('value');
+const apiKey = "3c5d9ad567245f91ed996395bc228529";
+
 
 
 // display the current time & date
@@ -41,17 +41,41 @@ function refreshBlock() {
 
 // console.log(citySearch);
 
-function getUserLoc() {
-    fetch('http://api.openweathermap.org/geo/1.0/direct?q=${citySearch},jp&limit=5&appid=${apiKey}')
+// function getVal() {
+//     const val = document.querySelector('input').value;
+//     console.log(val);
+// }
+
+function getUserLoc(citySearch) {
+    var url = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}`
+    console.log(url);
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        let lat = data.coord.lat;
+        let lon = data.coord.lon;
+        getLatAndLon(lat, lon);
+    })
+};
+
+function getLatAndLon(lat, lon) {
+    var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${apiKey}&units=imperial`
+    console.log(url);
+    fetch(url)
     .then(res => res.json())
     .then(data => {
         console.log(data)
     })
-};
+}
+
+$('#searchBtn').on('click', function(event) {
+    event.preventDefault()
+    const citySearch = $('#search').val();
+    getUserLoc(citySearch);
+}) 
 
 
-
-getUserLoc();
 });
 
 
