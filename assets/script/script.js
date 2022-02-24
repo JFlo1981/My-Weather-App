@@ -55,6 +55,7 @@ function getUserLoc(citySearch) {
         console.log(data)
         let lat = data.coord.lat;
         let lon = data.coord.lon;
+        $('#currentCity').html(data.name);
         getLatAndLon(lat, lon);
     })
 };
@@ -66,6 +67,11 @@ function getLatAndLon(lat, lon) {
     .then(res => res.json())
     .then(data => {
         console.log(data)
+        $('#currentWeather').html(`
+        <p>Temperature:${data.current.temp}<img src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png"></p>
+        <p>Wind Speed:${data.current.wind_speed}</p>
+        <p>Humidity:${data.current.humidity}</p>
+        <p>UV Index:${data.current.uvi}</p>`)
     })
 }
 
