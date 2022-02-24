@@ -68,10 +68,24 @@ function getLatAndLon(lat, lon) {
     .then(data => {
         console.log(data)
         $('#currentWeather').html(`
-        <p>Temperature:${data.current.temp}<img src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png"></p>
+        <p>Temperature:${data.current.temp}<img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png"></p>
         <p>Wind Speed:${data.current.wind_speed}</p>
         <p>Humidity:${data.current.humidity}</p>
         <p>UV Index:${data.current.uvi}</p>`)
+        var htmlCode = '';
+        for (let i=0; i < 5; i++) {
+            htmlCode += `<div class="tile is-parent">
+            <article class="tile is-child box">
+              <!-- <p class="title">Day 1</p> -->
+              <p class="subtitle">${moment().add(i+1, 'days').format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A")}</p>
+              <p><img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png"></p>
+              <p>Temp:${data.daily[i].temp.day}</p>
+              <p>Wind:${data.daily[i].wind_speed}</p>
+              <p>Hum:${data.daily[i].humidity}</p>
+            </article>
+          </div>`
+        }
+        $('#dailyWeather').html(htmlCode);
     })
 }
 
@@ -80,6 +94,7 @@ $('#searchBtn').on('click', function(event) {
     const citySearch = $('#search').val();
     getUserLoc(citySearch);
 }) 
+
 
 
 });
