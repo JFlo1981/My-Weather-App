@@ -14,15 +14,11 @@
 
 // HINT: Abstract API call to a function with a city as the parameter to be passed into the url 
 
-
-
 $(document).ready(function () {
-
+ 
 const apiKey = "3c5d9ad567245f91ed996395bc228529";
 
-
-
-// display the current time & date
+// displays the current time and date
 const date = moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A")
 $('#currentDay').html(date);
 
@@ -30,21 +26,21 @@ $('#currentDay').html(date);
 function setupRefresh() {
     setInterval(refreshBlock,60000);
 };
-setupRefresh()
+    setupRefresh()
 
 // display new moment each 60 secs
 function refreshBlock() {
     $('#currentDay').html(new moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A"))
 };
 
-
+// get "lat" and "lon" for forecast weather
 function getUserLoc(citySearch) {
     var url = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}`
     console.log(url);
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
         let lat = data.coord.lat;
         let lon = data.coord.lon;
         $('#currentCity').html(data.name);
@@ -52,44 +48,49 @@ function getUserLoc(citySearch) {
     })
 };
 
+// get weather data from lat and lon API fetch
 function getLatAndLon(lat, lon) {
     var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${apiKey}&units=imperial`
     console.log(url);
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
+
+        // to be displayed in current weather section
         $('#currentWeather').html(`
-        <p>Temperature: ${data.current.temp}<img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png"></p>
-        <p>Wind Speed: ${data.current.wind_speed}</p>
+        <p>Temperature: ${data.current.temp.toFixed(1)} \xB0F</p>
+        <p>Wind Speed: ${data.current.wind_speed.toFixed(0)} MPH</p>
         <p>Humidity: ${data.current.humidity}%</p>
         <p>UV Index: ${data.current.uvi}</p>`)
+
+        $('#currentIcon').html(`
+        <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>`)
+
+        // to be displayed in 5-day forecast
         var htmlCode = '';
         for (let i=0; i < 5; i++) {
-            htmlCode += `<div class="tile is-parent">
-            <article class="tile is-child box">
-              <!-- <p class="title">Day 1</p> -->
-              <p class="subtitle">${moment().add(i+1, 'days').format("MMM Do")}</p>
-              <p><img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png"></p>
-              <p>Temp: ${data.daily[i].temp.day}</p>
-              <p>Wind: ${data.daily[i].wind_speed}</p>
-              <p>Hum: ${data.daily[i].humidity}%</p>
-            </article>
-          </div>`
+            htmlCode += `
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="subtitle">${moment().add(i+1, 'days').format("MMM Do")}</p>
+                <p><img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png"></p>
+                <p>Temp: ${data.daily[i].temp.day.toFixed(1)} \xB0F</p>
+                <p>Wind: ${data.daily[i].wind_speed.toFixed(0)} MPH</p>
+                <p>Hum: ${data.daily[i].humidity}%</p>
+              </article>
+            </div>`
         }
         $('#dailyWeather').html(htmlCode);
-    })
-}
 
+    })
+};
+
+// search feature for user input bar/button
 $('#searchBtn').on('click', function(event) {
     event.preventDefault()
     const citySearch = $('#search').val();
     getUserLoc(citySearch);
-}) 
-
-
+}); 
 
 });
-
-
-// use lat and lon from geolocate as input for weatherAPI url

@@ -27,7 +27,7 @@
         <!-- searchbar -->
         <div class="field has-addons is-mobile level-left hero-head">
           <div class="control is-expanded mb-4 ml-6">
-              <input class="input" type="text" placeholder="Enter City: e.g. Tyler,TX,US -or- London,GB" id="search" onblur="getVal()">
+              <input class="input" type="text" placeholder="Enter City: e.g. Tyler,TX,US -or- London,GB" id="search">
           </div>
           <div class="control mb-4 mr-6">
               <a class="button is-white is-outlined" id="searchBtn">
@@ -37,7 +37,7 @@
         </div>
         <!-- <div>Make Favorite?</div>  -->
       </section>
-      <div class="tile">
+      <div class="tile has-text-centered">
         <div class="tile is-3 is-parent">
           <article class="tile is-child box">
               <!-- <p class="title">Ten</p> -->
@@ -51,7 +51,7 @@
           <article class="tile is-child box" >
             <!-- <p class="title">Nine</p> -->
             <p class="subtitle" id="currentCity">(Current Location)</p>
-            <button class="is-mobile button is-small is-info is-outlined ml-2">Favorite?</button>
+            <button class="is-mobile button is-small is-info is-outlined ml-2 mb-3">Favorite?</button>
             <div class="content" id="currentWeather">
               <p>Temperature:</p>
               <p>Wind Speed:</p>
@@ -63,21 +63,18 @@
         <div class="tile is-parent">
             <article class="tile is-child box">
                 <!-- <p class="title">Ten</p> -->
-                <p class="subtitle has-text-centered"></p>
-                <div class="content">
-                  <p class="has-text-centered">(large)</p>
-                  <p class="has-text-centered">(weather)</p>
+                <p class="subtitle has-text-centered">Right Now</p>
+                <div class="content" id="currentIcon">
                   <p class="has-text-centered">(icon)</p>
-                  <p class="has-text-centered">(here)</p>
                 </div>
             </article>
           </div>
       </div>
-      <div class="tile is-ancestor m-1" id="dailyWeather">
+      <div class="tile is-ancestor m-1 has-text-centered" id="dailyWeather">
         <div class="tile is-parent">
           <article class="tile is-child box">
             <!-- <p class="title">Day 1</p> -->
-            <p class="subtitle">(date here)</p>
+            <p class="subtitle is-marginless">(date here)</p>
             <p>(icon)</p>
             <p>Temp:</p>
             <p>Wind:</p>
@@ -87,7 +84,7 @@
         <div class="tile is-parent">
           <article class="tile is-child box">
             <!-- <p class="title">Day 2</p> -->
-            <p class="subtitle">(date here)</p>
+            <p class="subtitle is-marginless">(date here)</p>
             <p>(icon)</p>
             <p>Temp:</p>
             <p>Wind:</p>
@@ -97,7 +94,7 @@
         <div class="tile is-parent">
           <article class="tile is-child box">
             <!-- <p class="title">Day 3</p> -->
-            <p class="subtitle">(date here)</p>
+            <p class="subtitle is-marginless">(date here)</p>
             <p>(icon)</p>
             <p>Temp:</p>
             <p>Wind:</p>
@@ -107,7 +104,7 @@
         <div class="tile is-parent">
           <article class="tile is-child box">
             <!-- <p class="title">Day 4</p> -->
-            <p class="subtitle">(date here)</p>
+            <p class="subtitle is-marginless">(date here)</p>
             <p>(icon)</p>
             <p>Temp:</p>
             <p>Wind:</p>
@@ -117,7 +114,7 @@
         <div class="tile is-parent">
             <article class="tile is-child box">
               <!-- <p class="title">Day 5</p> -->
-              <p class="subtitle">(date here)</p>
+              <p class="subtitle is-marginless">(date here)</p>
               <p>(icon)</p>
               <p>Temp:</p>
               <p>Wind:</p>
