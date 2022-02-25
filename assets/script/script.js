@@ -1,13 +1,5 @@
 // Weather Dashboard Challenge 6 PseudoCode
 
-// 1. Explore Open Weather API and Documentation\
-// 2. Figure out to get an API-Key for Open Weather API (which may involve making an account)
-// 3. Create a search box
-    // -HTML markup, css
-    // API call to run onClick of the search button 
-    // Pass the user input into the url of the API call appropriately
-// 4. Display the queried city's information on the dashboard for the user to see including forecast
-// 5. When we display the city's UV index, we want to display it in a color that matches the number 
 // 6. Store the user's search history in local storage
 //    -get the user's search history and display it in the search dropdown 
 //    -when the user clicks the city from the dropdown, pass the city into the api call to get and display the info from that city again
@@ -15,7 +7,7 @@
 $(document).ready(function () {
  
 const apiKey = "3c5d9ad567245f91ed996395bc228529";
-
+let recentCitySearch = [];
 
 
 // displays the current time and date
@@ -105,7 +97,8 @@ function getLatAndLon(lat, lon) {
         <p>Humidity: ${data.current.humidity}%</p>
         <div id="uvTile" class="mx-6">
         <p>UV Index: ${data.current.uvi}</p>
-        </div>`)
+        </div>
+        `)
 
         $('#currentIcon').html(`
         <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>
@@ -173,9 +166,19 @@ function getLatAndLon(lat, lon) {
 
             // search feature for user input bar/button
             $('#searchBtn').on('click', function(event) {
-                event.preventDefault()
+                event.preventDefault();
+
                 const citySearch = $('#search').val();
                 getUserLoc(citySearch);
+                if (!recentCitySearch.includes(citySearch)) {
+                    recentCitySearch.push(citySearch);
+                    let savedCity = $(`
+                    <li class="save-item">${citySearch}</li>
+                    `);
+                    $("savedCities").append(savedCity);
+                };
+
+                localStorage.setItem("citySearch", JSON.stringify(recentCitySearch));
             }); 
 
 });
