@@ -1,14 +1,7 @@
 // Weather Dashboard Challenge 6 PseudoCode
 
-// 6. Store the user's search history in local storage
 //    -get the user's search history and display it in the search dropdown 
 //    -when the user clicks the city from the dropdown, pass the city into the api call to get and display the info from that city again
-
-$(document).ready(function () {
- 
-const apiKey = "3c5d9ad567245f91ed996395bc228529";
-let recentCitySearch = [];
-
 
 // displays the current time and date
 const date = moment().format("dddd, MMM Do, YYYY")
@@ -41,7 +34,7 @@ function refreshBlock2() {
     $('#currentTime').html(new moment().format("h:mm A"))
 };
 
-
+const apiKey = "3c5d9ad567245f91ed996395bc228529";
 
 // get "lat" and "lon" for forecast weather
 function getUserLoc(citySearch) {
@@ -165,6 +158,7 @@ function getLatAndLon(lat, lon) {
 };
 
             // search feature for user input bar/button
+            let recentCitySearch = [];
             $('#searchBtn').on('click', function(event) {
                 event.preventDefault();
 
@@ -172,13 +166,27 @@ function getLatAndLon(lat, lon) {
                 getUserLoc(citySearch);
                 if (!recentCitySearch.includes(citySearch)) {
                     recentCitySearch.push(citySearch);
-                    let savedCity = $(`
+                    let recentCity = $(`
                     <li class="save-item">${citySearch}</li>
                     `);
-                    $("savedCities").append(savedCity);
+                    $("savedCities").append(recentCity);
                 };
 
                 localStorage.setItem("citySearch", JSON.stringify(recentCitySearch));
             }); 
 
+            $(document).on("click", "save-item", function() {
+                let savedCity = $(this).html();
+                getUserLoc(savedCity);
+            });
+
+$(document).ready(function () {
+    let searchHistory = JSON.parse(localStorage.getItem("citySearch"));
+
+    if (searchHistory !== null) {
+        let searchIndex = searchHistory.length -1;
+        let searchedCity = searchHistory[searchIndex];
+        getUserLoc(searchedCity);
+
+    }       
 });
