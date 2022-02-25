@@ -56,10 +56,31 @@ function getLatAndLon(lat, lon) {
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
 
-        // to be displayed in current weather section
+        // sets the current wind degree to direction strings
         let currentDirection;
+        let currWindDeg = data.current.wind_deg 
+        
+        if (currWindDeg >= 337.6 && currWindDeg <= 360 || currWindDeg >= 0 && currWindDeg <= 22.5) {
+            currentDirection = "N";
+        } else if (currWindDeg >= 22.6 && currWindDeg <= 67.5) {
+            currentDirection = "NE";
+        } else if (currWindDeg >= 67.6 && currWindDeg <= 112.5) {
+            currentDirection = "E";
+        } else if (currWindDeg >= 112.6 && currWindDeg <= 157.5) {
+            currentDirection = "SE";
+        } else if (currWindDeg >= 157.6 && currWindDeg <= 202.5) {
+            currentDirection = "S";
+        } else if (currWindDeg >= 202.6 && currWindDeg <= 247.5) {
+            currentDirection = "SW";
+        } else if (currWindDeg >= 247.6 && currWindDeg <= 292.5) {
+            currentDirection = "W";
+        } else if (currWindDeg >= 292.6 && currWindDeg <= 337.5) {
+            currentDirection = "NW";
+        }
+
+        // display of the current weather fetch data
         $('#currentWeather').html(`
         <p>Temperature: ${data.current.temp.toFixed(1)} \xB0F</p>
         <p>Wind: ${currentDirection} ${data.current.wind_speed.toFixed(0)} mph</p>
@@ -72,10 +93,32 @@ function getLatAndLon(lat, lon) {
         <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>
         `)
 
-        // to be displayed in 5-day forecast
+        // sets the daily wind degree to direction strings
+    for (let i=0; i < 5; i++) {
+        var dailyWindDeg = data.daily[i].wind_deg
+        var dailyDirection;
+        if (dailyWindDeg >= 337.6 && dailyWindDeg <= 360 || dailyWindDeg >= 0 && dailyWindDeg <= 22.5) {
+            dailyDirection = "N";
+        } else if (dailyWindDeg >= 22.6 && dailyWindDeg <= 67.5) {
+            dailyDirection = "NE";
+        } else if (dailyWindDeg >= 67.6 && dailyWindDeg <= 112.5) {
+            dailyDirection = "E";
+        } else if (dailyWindDeg >= 112.6 && dailyWindDeg <= 157.5) {
+            dailyDirection = "SE";
+        } else if (dailyWindDeg >= 157.6 && dailyWindDeg <= 202.5) {
+            dailyDirection = "S";
+        } else if (dailyWindDeg >= 202.6 && dailyWindDeg <= 247.5) {
+            dailyDirection = "SW";
+        } else if (dailyWindDeg >= 247.6 && dailyWindDeg <= 292.5) {
+            dailyDirection = "W";
+        } else if (dailyWindDeg >= 292.6 && dailyWindDeg <= 337.5) {
+            dailyDirection = "NW";
+        }
+    };
+        // display of the daily weather fetch data
         let htmlCode = '';
-        let dailyDirection;
         for (let i=0; i < 5; i++) {
+            var dailyWindDeg = data.daily[i].wind_deg
             htmlCode += `
             <div class="tile is-parent">
               <article class="tile is-child box">
@@ -87,7 +130,10 @@ function getLatAndLon(lat, lon) {
                 <p>Hum: ${data.daily[i].humidity}%</p>
               </article>
             </div>`
+            console.log(dailyWindDeg);
         }
+
+
         $('#dailyWeather').html(htmlCode);
 
         // sets the UV index color based on current search city UVI
@@ -105,45 +151,9 @@ function getLatAndLon(lat, lon) {
                 $('#uvTile').css("background-color", '#A416D3').css("color", "white");
             } 
             
-        let currWindDeg = data.current.wind_deg 
+           
+
         
-            if (currWindDeg >= 337.6 && currWindDeg <= 360 || currWindDeg >= 0 && currWindDeg <= 22.5) {
-                currentDirection = "N";
-            } else if (currWindDeg >= 22.6 && currWindDeg <= 67.5) {
-                currentDirection = "NE";
-            } else if (currWindDeg >= 67.6 && currWindDeg <= 112.5) {
-                currentDirection = "E";
-            } else if (currWindDeg >= 112.6 && currWindDeg <= 157.5) {
-                currentDirection = "SE";
-            } else if (currWindDeg >= 157.6 && currWindDeg <= 202.5) {
-                currentDirection = "S";
-            } else if (currWindDeg >= 202.6 && currWindDeg <= 247.5) {
-                currentDirection = "SW";
-            } else if (currWindDeg >= 247.6 && currWindDeg <= 292.5) {
-                currentDirection = "W";
-            } else if (currWindDeg >= 292.6 && currWindDeg <= 337.5) {
-                currentDirection = "NW";
-            }   
-
-        let dailyWindDeg = data.daily.wind_deg
-
-            if (dailyWindDeg >= 337.6 && dailyWindDeg <= 360 || dailyWindDeg >= 0 && dailyWindDeg <= 22.5) {
-                dailyDirection = "N";
-            } else if (dailyWindDeg >= 22.6 && dailyWindDeg <= 67.5) {
-                dailyDirection = "NE";
-            } else if (dailyWindDeg >= 67.6 && dailyWindDeg <= 112.5) {
-                dailyDirection = "E";
-            } else if (dailyWindDeg >= 112.6 && dailyWindDeg <= 157.5) {
-                dailyDirection = "SE";
-            } else if (dailyWindDeg >= 157.6 && dailyWindDeg <= 202.5) {
-                dailyDirection = "S";
-            } else if (dailyWindDeg >= 202.6 && dailyWindDeg <= 247.5) {
-                dailyDirection = "SW";
-            } else if (dailyWindDeg >= 247.6 && dailyWindDeg <= 292.5) {
-                dailyDirection = "W";
-            } else if (dailyWindDeg >= 292.6 && dailyWindDeg <= 337.5) {
-                dailyDirection = "NW";
-            }
     })
 };
 
