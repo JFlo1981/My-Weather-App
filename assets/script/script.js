@@ -19,7 +19,7 @@ $(document).ready(function () {
 const apiKey = "3c5d9ad567245f91ed996395bc228529";
 
 // displays the current time and date
-const date = moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A")
+const date = moment().format("[It is ]dddd, MMM Do, YYYY <br> [Your current time is ]h:mm A")
 $('#currentDay').html(date);
 
 // set refresh every minute
@@ -35,7 +35,7 @@ function refreshBlock() {
 
 // get "lat" and "lon" for forecast weather
 function getUserLoc(citySearch) {
-    var url = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}`
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}`
     console.log(url);
     fetch(url)
     .then(res => res.json())
@@ -50,7 +50,7 @@ function getUserLoc(citySearch) {
 
 // get weather data from lat and lon API fetch
 function getLatAndLon(lat, lon) {
-    var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${apiKey}&units=imperial`
+    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${apiKey}&units=imperial`
     console.log(url);
     fetch(url)
     .then(res => res.json())
@@ -61,14 +61,17 @@ function getLatAndLon(lat, lon) {
         $('#currentWeather').html(`
         <p>Temperature: ${data.current.temp.toFixed(1)} \xB0F</p>
         <p>Wind Speed: ${data.current.wind_speed.toFixed(0)} MPH</p>
-        <p>Humidity: ${data.current.humidity}%</p>`)
+        <p>Humidity: ${data.current.humidity}%</p>
+        <div id="uvTile" class="mx-6">
+        <p>UV Index: ${data.current.uvi}</p>
+        </div>`)
 
         $('#currentIcon').html(`
         <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>
-        <p>UV Index: ${data.current.uvi}</p>`)
+        `)
 
         // to be displayed in 5-day forecast
-        var htmlCode = '';
+        let htmlCode = '';
         for (let i=0; i < 5; i++) {
             htmlCode += `
             <div class="tile is-parent">
@@ -84,6 +87,20 @@ function getLatAndLon(lat, lon) {
         }
         $('#dailyWeather').html(htmlCode);
 
+        // sets the UV index color based on current search city UVI
+        let UVI = data.current.uvi
+
+            if (UVI >= 0 && UVI <= 2) {
+                $('#uvTile').css("background-color", '#60D394').css("color", "white");
+            } else if (UVI > 2 && UVI <= 5) {
+                $('#uvTile').css("background-color", '#F9E900');
+            } else if (UVI > 5 && UVI <= 7) {
+                $('#uvTile').css("background-color", '#F55F14').css("color", "white");
+            } else if (UVI > 7 && UVI <= 10) {
+                $('#uvTile').css("background-color", '#AE1010').css("color", "white");
+            } else {
+                $('#uvTile').css("background-color", '#A416D3').css("color", "white");
+            }    
     })
 };
 
