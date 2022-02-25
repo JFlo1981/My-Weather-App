@@ -12,26 +12,44 @@
 //    -get the user's search history and display it in the search dropdown 
 //    -when the user clicks the city from the dropdown, pass the city into the api call to get and display the info from that city again
 
-// HINT: Abstract API call to a function with a city as the parameter to be passed into the url 
-
 $(document).ready(function () {
  
 const apiKey = "3c5d9ad567245f91ed996395bc228529";
 
+
+
 // displays the current time and date
-const date = moment().format("[It is ]dddd, MMM Do, YYYY <br> [Your current time is ]h:mm A")
+const date = moment().format("dddd, MMM Do, YYYY")
 $('#currentDay').html(date);
 
 // set refresh every minute
-function setupRefresh() {
-    setInterval(refreshBlock,60000);
+function setupRefresh1() {
+    setInterval(refreshBlock1,60000);
 };
-    setupRefresh()
+    setupRefresh1()
 
 // display new moment each 60 secs
-function refreshBlock() {
-    $('#currentDay').html(new moment().format("[It is ]dddd, MMM Do, YYYY <br> [The current time is ]h:mm A"))
+function refreshBlock1() {
+    $('#currentDay').html(new moment().format("dddd, MMM Do, YYYY"))
 };
+
+
+
+const time = moment().format("h:mm A")
+$('#currentTime').html(time);
+
+// set refresh every minute
+function setupRefresh2() {
+    setInterval(refreshBlock2,60000);
+};
+    setupRefresh2()
+
+// display new moment each 60 secs
+function refreshBlock2() {
+    $('#currentTime').html(new moment().format("h:mm A"))
+};
+
+
 
 // get "lat" and "lon" for forecast weather
 function getUserLoc(citySearch) {
@@ -93,32 +111,29 @@ function getLatAndLon(lat, lon) {
         <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>
         `)
 
-        // sets the daily wind degree to direction strings
-    for (let i=0; i < 5; i++) {
-        var dailyWindDeg = data.daily[i].wind_deg
-        var dailyDirection;
-        if (dailyWindDeg >= 337.6 && dailyWindDeg <= 360 || dailyWindDeg >= 0 && dailyWindDeg <= 22.5) {
-            dailyDirection = "N";
-        } else if (dailyWindDeg >= 22.6 && dailyWindDeg <= 67.5) {
-            dailyDirection = "NE";
-        } else if (dailyWindDeg >= 67.6 && dailyWindDeg <= 112.5) {
-            dailyDirection = "E";
-        } else if (dailyWindDeg >= 112.6 && dailyWindDeg <= 157.5) {
-            dailyDirection = "SE";
-        } else if (dailyWindDeg >= 157.6 && dailyWindDeg <= 202.5) {
-            dailyDirection = "S";
-        } else if (dailyWindDeg >= 202.6 && dailyWindDeg <= 247.5) {
-            dailyDirection = "SW";
-        } else if (dailyWindDeg >= 247.6 && dailyWindDeg <= 292.5) {
-            dailyDirection = "W";
-        } else if (dailyWindDeg >= 292.6 && dailyWindDeg <= 337.5) {
-            dailyDirection = "NW";
-        }
-    };
-        // display of the daily weather fetch data
-        let htmlCode = '';
-        for (let i=0; i < 5; i++) {
+    // sets the daily wind degree to direction strings
+          let htmlCode = '';
+          for (let i=0; i < 5; i++) {
             var dailyWindDeg = data.daily[i].wind_deg
+            if (dailyWindDeg >= 337.6 && dailyWindDeg <= 360 || dailyWindDeg >= 0 && dailyWindDeg <= 22.5) {
+                dailyDirection = "N";
+            } else if (dailyWindDeg >= 22.6 && dailyWindDeg <= 67.5) {
+                dailyDirection = "NE";
+            } else if (dailyWindDeg >= 67.6 && dailyWindDeg <= 112.5) {
+                dailyDirection = "E";
+            } else if (dailyWindDeg >= 112.6 && dailyWindDeg <= 157.5) {
+                dailyDirection = "SE";
+            } else if (dailyWindDeg >= 157.6 && dailyWindDeg <= 202.5) {
+                dailyDirection = "S";
+            } else if (dailyWindDeg >= 202.6 && dailyWindDeg <= 247.5) {
+                dailyDirection = "SW";
+            } else if (dailyWindDeg >= 247.6 && dailyWindDeg <= 292.5) {
+                dailyDirection = "W";
+            } else if (dailyWindDeg >= 292.6 && dailyWindDeg <= 337.5) {
+                dailyDirection = "NW";
+            }
+
+            // displays of the daily weather fetch data on the tiles
             htmlCode += `
             <div class="tile is-parent">
               <article class="tile is-child box">
@@ -132,7 +147,6 @@ function getLatAndLon(lat, lon) {
             </div>`
             console.log(dailyWindDeg);
         }
-
 
         $('#dailyWeather').html(htmlCode);
 
@@ -157,11 +171,11 @@ function getLatAndLon(lat, lon) {
     })
 };
 
-// search feature for user input bar/button
-$('#searchBtn').on('click', function(event) {
-    event.preventDefault()
-    const citySearch = $('#search').val();
-    getUserLoc(citySearch);
-}); 
+            // search feature for user input bar/button
+            $('#searchBtn').on('click', function(event) {
+                event.preventDefault()
+                const citySearch = $('#search').val();
+                getUserLoc(citySearch);
+            }); 
 
 });
