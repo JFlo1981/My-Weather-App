@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
+    
+
     // displays the current time and date
-    const date = moment().format("dddd, MMM Do, YYYY")
+    const date = moment().format("h:mm A <br> dddd, MMM Do")
     $('#currentDay').html(date);
 
     // set refresh every minute
@@ -12,21 +14,7 @@ $(document).ready(function () {
 
     // display new moment each 60 secs
     function refreshBlock1() {
-        $('#currentDay').html(new moment().format("dddd, MMM Do, YYYY"))
-    };
-
-    const time = moment().format("h:mm A")
-    $('#currentTime').html(time);
-
-    // set refresh every minute
-    function setupRefresh2() {
-        setInterval(refreshBlock2,60000);
-    };
-        setupRefresh2()
-
-    // display new moment each 60 secs
-    function refreshBlock2() {
-        $('#currentTime').html(new moment().format("h:mm A"))
+        $('#currentDay').html(new moment().format("h:mm A <br> dddd, MMM Do"))
     };
 
     const apiKey = "3c5d9ad567245f91ed996395bc228529";
@@ -57,8 +45,29 @@ $(document).ready(function () {
             // console.log(data)
 
             // sets the current wind degree to direction strings
+            let uvWord;
             let currentDirection;
             let currWindDeg = data.current.wind_deg 
+            // sets the UV index color based on current search city UVI
+            let UVI = data.current.uvi
+            
+
+                if (UVI >= 0 && UVI <= 2) {
+                    uvWord = "Low";
+                    $('#uvTile').css("background-color", '#60D394').css("color", "white");
+                } else if (UVI > 2 && UVI <= 5) {
+                    uvWord = "Moderate";
+                    $('#uvTile').css("background-color", '#F9E900').css("color", "black");
+                } else if (UVI > 5 && UVI <= 7) {
+                    uvWord = "High";
+                    $('#uvTile').css("background-color", '#F55F14').css("color", "white");
+                } else if (UVI > 7 && UVI <= 10) {
+                    uvWord = "Very High";
+                    $('#uvTile').css("background-color", '#AE1010').css("color", "white");
+                } else {
+                    uvWord = "Extreme";
+                    $('#uvTile').css("background-color", '#A416D3').css("color", "white");
+                }
             
             if (currWindDeg >= 337.6 && currWindDeg <= 360 || currWindDeg >= 0 && currWindDeg <= 22.5) {
                 currentDirection = "N";
@@ -81,15 +90,15 @@ $(document).ready(function () {
             // display of the current weather fetch data
             $('#currentWeather').html(`
             <p>Temperature: ${data.current.temp.toFixed(1)} \xB0F</p>
+            <p>Feels Like: ${data.current.feels_like.toFixed(1)} \xB0F</p>
             <p>Wind: ${currentDirection} ${data.current.wind_speed.toFixed(0)} mph</p>
             <p>Humidity: ${data.current.humidity}%</p>
-            <div id="uvTile" class="mx-6">
-            <p>UV Index: ${data.current.uvi}</p>
-            </div>
             `)
 
             $('#currentIcon').html(`
+            <p class="is-size-4">UV Index</p>
             <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>
+            <p class="is-size-4">${data.current.uvi} ${uvWord}</p>
             `)
 
         // sets the daily wind degree to direction strings
@@ -131,20 +140,7 @@ $(document).ready(function () {
 
             $('#dailyWeather').html(htmlCode);
 
-            // sets the UV index color based on current search city UVI
-            const UVI = data.current.uvi
-
-                if (UVI >= 0 && UVI <= 2) {
-                    $('#uvTile').css("background-color", '#60D394').css("color", "white");
-                } else if (UVI > 2 && UVI <= 5) {
-                    $('#uvTile').css("background-color", '#F9E900');
-                } else if (UVI > 5 && UVI <= 7) {
-                    $('#uvTile').css("background-color", '#F55F14').css("color", "white");
-                } else if (UVI > 7 && UVI <= 10) {
-                    $('#uvTile').css("background-color", '#AE1010').css("color", "white");
-                } else {
-                    $('#uvTile').css("background-color", '#A416D3').css("color", "white");
-                } 
+             
         })
     };
 
