@@ -3,6 +3,8 @@
 //    -get the user's search history and display it in the search dropdown 
 //    -when the user clicks the city from the dropdown, pass the city into the api call to get and display the info from that city again
 
+$(document).ready(function () {
+
 // displays the current time and date
 const date = moment().format("dddd, MMM Do, YYYY")
 $('#currentDay').html(date);
@@ -162,25 +164,25 @@ function getLatAndLon(lat, lon) {
             $('#searchBtn').on('click', function(event) {
                 event.preventDefault();
 
-                const citySearch = $('#search').val();
+                let citySearch = $('#search').val();
                 getUserLoc(citySearch);
                 if (!recentCitySearch.includes(citySearch)) {
                     recentCitySearch.push(citySearch);
                     let recentCity = $(`
-                    <li class="save-item">${citySearch}</li>
+                    <button class="button is-small is-fullwidth is-info is-outlined save-group-item">${citySearch}</li>
                     `);
-                    $("savedCities").append(recentCity);
+                    $("#savedCities").append(recentCity);
                 };
 
                 localStorage.setItem("citySearch", JSON.stringify(recentCitySearch));
             }); 
-
-            $(document).on("click", "save-item", function() {
+           
+            $(document).on("click", ".save-group-item", function() {
                 let savedCity = $(this).html();
                 getUserLoc(savedCity);
             });
 
-$(document).ready(function () {
+
     let searchHistory = JSON.parse(localStorage.getItem("citySearch"));
 
     if (searchHistory !== null) {
