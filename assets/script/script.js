@@ -17,7 +17,7 @@ $(document).ready(function () {
         $('#currentDay').html(new moment().format("h:mm A <br> dddd, MMM Do"))
     };
 
-    const apiKey = "3c5d9ad567245f91ed996395bc228529";
+    const apiKey = "13a3e9ee9e5dcaabc3e7976ad9a77077";
 
     // get "lat" and "lon" for forecast weather
     function getUserLoc(citySearch) {
@@ -89,14 +89,14 @@ $(document).ready(function () {
 
             // display of the current weather fetch data
             $('#currentWeather').html(`
-            <p>Temperature: ${data.current.temp.toFixed(1)} \xB0F</p>
-            <p>Feels Like: ${data.current.feels_like.toFixed(1)} \xB0F</p>
-            <p>Wind: ${currentDirection} ${data.current.wind_speed.toFixed(0)} mph</p>
-            <p>Humidity: ${data.current.humidity}%</p>
+            <p class="is-size-4">Temperature: ${data.current.temp.toFixed(1)} \xB0F</p>
+            <p class="is-size-4">Feels Like: ${data.current.feels_like.toFixed(1)} \xB0F</p>
+            <p class="is-size-4">Wind: ${currentDirection} ${data.current.wind_speed.toFixed(0)} mph</p>
+            <p class="is-size-4">Humidity: ${data.current.humidity}%</p>
             `)
 
             $('#currentIcon').html(`
-            <p class="is-size-4">UV Index</p>
+            <p class="is-size-3">UV Index</p>
             <p class="has-text-centered"><img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png"></p>
             <p class="is-size-4">${data.current.uvi} ${uvWord}</p>
             `)
@@ -149,12 +149,12 @@ $(document).ready(function () {
                 $('#searchBtn').on('click', function(event) {
                     event.preventDefault();
 
-                    let citySearch = $('#search').val();
+                    let citySearch = $('#search').val().trim();
                     getUserLoc(citySearch);
                     if (!recentCitySearch.includes(citySearch)) {
                         recentCitySearch.push(citySearch);
                         let recentCity = $(`
-                        <button class="button is-small is-fullwidth is-info is-outlined save-group-item">${citySearch}</li>
+                        <button class="button is-fullwidth is-info is-outlined save-group-item">${citySearch}</li>
                         `);
                         $("#savedCities").append(recentCity);
                     };
