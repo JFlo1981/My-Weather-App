@@ -1,4 +1,10 @@
 {
-  "cSpell.words": ["Fullheight", "fullwidth", "geolocate", "marginless"],
+  "cSpell.words": [
+    "Bulma",
+    "Fullheight",
+    "fullwidth",
+    "geolocate",
+    "marginless"
+  ],
   "liveServer.settings.port": 5501
 }
