@@ -20,7 +20,7 @@ The 5-day forecast section is to feature 5 tiles to contain the weather for the 
 There will also be a search history section which will hold the most recent user searches.  If clicked, the user will be presented with the current and future weather for that city.
 
 ## Weather Anytime
-https://jflo1981.github.io/My-Weather-App/
+![Weather Anytime](https://jflo1981.github.io/My-Weather-App/)
 
 ![Webpage ScreenShot](https://user-images.githubusercontent.com/88595179/156230877-38fb69f9-47f1-4221-b77e-bec808222b08.png)
 
