@@ -161,6 +161,14 @@ $(document).ready(function () {
 
                     localStorage.setItem("citySearch", JSON.stringify(recentCitySearch));
                 }); 
+
+                // allows user to input city into search by pressing the <enter> key
+                $('#search').keyup(function(event) {
+                    if (event.which === 13) {
+                       event.preventDefault() ;
+                       $('#searchBtn').click();
+                    }
+                });
             
                 $(document).on("click", ".save-group-item", function() {
                     let savedCity = $(this).html();
